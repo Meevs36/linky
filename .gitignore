@@ -1,0 +1,8 @@
+# Author -- Meevs
+# Creation Date -- Sat Oct  3 20:05:21 2020
+# File Name -- .gitignore
+# Notes -- 
+
+*~
+\#*#
+*.out
