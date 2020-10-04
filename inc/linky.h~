@@ -1,0 +1,35 @@
+/*
+ * Author -- Meevs
+ * Creation Date -- Sat Oct  3 12:24:17 2020
+ * File Name -- linky.h
+ * Notes -- 
+ */
+
+#ifndef __LINKY__
+#define __LINKY__
+
+#include <stdlib.h>
+#include <stdio.h>
+
+struct linky
+{
+  void *data;
+
+  struct linky *next;
+  struct linky *prev;
+};
+
+#define addNode(list, data)				\
+  {							\
+    _Generic (data,					\
+	      char: addChar (&list, (char)data),	\
+	      short: addShort (&list, (short)data),	\
+	      int: addInt (&list, (int)data),		\
+	      long: addLong (&list, (long)data),	\
+    default: addBase (&list, (void *)data));		\
+  }
+
+
+struct linky **findEndOfList (struct linky **list);
+struct linky *addBase (struct linky **list, void *data);
+#endif
