@@ -22,7 +22,7 @@ struct linky **linkyAppendToList (struct linky **list)
 
   if (list != NULL)
     {
-      tempPtr = linkyFindEndOfList (list);
+      for (tempPtr = list; *tempPtr != NULL && (*tempPtr)->next != NULL; (*tempPtr)->size++, tempPtr = &(*tempPtr)->next);
 
       if (*tempPtr == NULL)
 	*tempPtr = (struct linky *)calloc (1, sizeof (struct linky));
@@ -32,28 +32,11 @@ struct linky **linkyAppendToList (struct linky **list)
 	  (*tempPtr)->next->prev = (*tempPtr);
 	  tempPtr = &(*tempPtr)->next;
 	}
+
+      (*tempPtr)->size++;
     }
 
   return tempPtr;
-}
-
-/*
- * Author -- Meevs
- * Creation Date -- Sat Oct  3 14:19:04 2020
- * Function Name -- linkyFindEndOfList 
- * Function Purpose -- Finds the last node in the given list.
- * Function Parameters -- 
- *     -- struct linky **list -- The list that will be used to determine the rmine mine the end of.
- * Function Returns -- A pointer to the last node in the given list
- * Notes --
- */
-struct linky **linkyFindEndOfList (struct linky **list)
-{
-  struct linky **tempList = NULL;
-
-  for (tempList = list; *tempList != NULL && (*tempList)->next != NULL; tempList = &(*tempList)->next);
-  
-    return tempList;
 }
 
 /*

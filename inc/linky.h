@@ -13,6 +13,7 @@
 
 struct linky
 {
+  unsigned int size;
   void *data;
 
   struct linky *next;
@@ -36,7 +37,6 @@ struct linky
 #define linkyGetData(linky, type) (*((type *) linky->data))
 
 struct linky **linkyAppendToList (struct linky **list);
-struct linky **linkyFindEndOfList (struct linky **list);
 struct linky *linkyAddChar (struct linky **list, char data);
 struct linky *linkyAddShort (struct linky **list, short data);
 struct linky *linkyAddInt (struct linky **list, int data);
