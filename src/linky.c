@@ -7,6 +7,20 @@
 
 #include <linky.h>
 
+int main (int argC, char **argV)
+{
+  struct linky *list = NULL;
+  struct linky *temp = NULL;
+
+  linkyAddNode (list, 25);
+  linkyAddNode (list, 100250);
+
+  for (temp = list; temp != NULL; temp = temp->next)
+    printf ("%d\r\n", linkyGetData (temp, int));
+  
+  return 0;
+}
+
 /*
  * Author -- Meevs
  * Creation Date -- Sat Oct  3 17:17:18 2020

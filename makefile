@@ -1,4 +1,4 @@
-TARGET = liblinky.a
+TARGET = linky.out
 FLAGS =	
 BASE_FLAGS = -I$(INC_DIR) -L$(LIB_DIR)
 OUT_FLAGS = -o $@
@@ -24,7 +24,7 @@ all: $(BIN_DIR)/$(TARGET)
 
 $(BIN_DIR)/$(TARGET): $(OBJECTS)
 	if ! [ -d $(BIN_DIR) ]; then mkdir $(BIN_DIR); fi
-	ar rcs $(OUT_FLAGS) $^
+	$(CC) $(BASE_FLAGS) $(OBJECTS) $(OUT_FLAGS) $(FLAGS)
 
 $(OBJECTS): $(OBJ_DIR)/%.o : $(SRC_DIR)/%$(SRC_EXT)
 	if ! [ -d $(OBJ_DIR) ]; then mkdir $(OBJ_DIR); fi
