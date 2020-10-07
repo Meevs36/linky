@@ -1,6 +1,6 @@
 TARGET = liblinky.a
 FLAGS =	
-BASE_FLAGS = -I$(INC_DIR) -L$(LIB_DIR)
+BASE_FLAGS = -I$(INC_DIR) $(LIBRARIES:$(LIB_DIR)/%=-I$(LIB_DIR)/%/inc) $(LIBRARIES:$(LIB_DIR)/%=-L$(LIB_DIR)/%/bin/)
 OUT_FLAGS = -o $@
 OBJ_FLAGS = -c $<
 
@@ -18,7 +18,8 @@ BIN_DIR = bin
 SOURCES := $(wildcard $(SRC_DIR)/*$(SRC_EXT))
 INCLUDE := $(wildcard $(INC_DIR)/*$(INC_EXT))
 OBJECTS := $(SOURCES:$(SRC_DIR)/%$(SRC_EXT)=$(OBJ_DIR)/%.o)
-
+LIBRARIES := $(wildcard $(LIB_DIR)/*)
+DEPENDENCIES := $(LIBRARIES:lib/%=/bin/lib%.a)
 
 all: $(BIN_DIR)/$(TARGET)
 
@@ -30,8 +31,12 @@ $(OBJECTS): $(OBJ_DIR)/%.o : $(SRC_DIR)/%$(SRC_EXT)
 	if ! [ -d $(OBJ_DIR) ]; then mkdir $(OBJ_DIR); fi
 	$(CC) $(BASE_FLAGS) $(OBJ_FLAGS) $(OUT_FLAGS) $(FLAGS)
 
+$(DEPENDENCIES): 
+	$(LIBRARIES:%=make -C %;)
+
 clean: tidy
 	-rm -r $(BIN_DIR)
+	$(LIBRARIES:%=make clean -C %;)
 
 tidy:
 	-rm *~
