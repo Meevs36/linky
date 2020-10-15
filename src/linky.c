@@ -22,7 +22,7 @@ struct linky **linkyAppendToList (struct linky **list)
 
   if (list != NULL)
     {
-      for (tempPtr = list; *tempPtr != NULL && (*tempPtr)->next != NULL; (*tempPtr)->size++, tempPtr = &(*tempPtr)->next);
+      for (tempPtr = list; *tempPtr != NULL && (*tempPtr)->size++ && (*tempPtr)->next != NULL; tempPtr = &(*tempPtr)->next);
 
       if (*tempPtr == NULL)
 	*tempPtr = (struct linky *)calloc (1, sizeof (struct linky));
