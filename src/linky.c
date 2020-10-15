@@ -14,6 +14,9 @@ int main (int argC, char **argV)
 
   linkyAddNode (list, 25);
   linkyAddNode (list, 100250);
+  linkyAddNode (list, 123);
+
+  printf ("List size is: %d\r\n", list->size);
 
   for (temp = list; temp != NULL; temp = temp->next)
     printf ("%d\r\n", linkyGetData (temp, int));
@@ -36,7 +39,7 @@ struct linky **linkyAppendToList (struct linky **list)
 
   if (list != NULL)
     {
-      for (tempPtr = list; *tempPtr != NULL && (*tempPtr)->next != NULL; (*tempPtr)->size++, tempPtr = &(*tempPtr)->next);
+      for (tempPtr = list; *tempPtr != NULL && (*tempPtr)->size++ && (*tempPtr)->next != NULL; tempPtr = &(*tempPtr)->next);
 
       if (*tempPtr == NULL)
 	*tempPtr = (struct linky *)calloc (1, sizeof (struct linky));
